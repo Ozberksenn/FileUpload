@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function onLoad() {
+        fetch("https://42b5-88-239-147-76.ngrok-free.app/images")
+          .then((response) => response.json())
+          .then((data) => {
+            const newData = data.file;
+            newData.map((index) => {
+              console.log(index);
+              var image = document.createElement("img");
+              image.src = `uploads/${index}`;
+              image.style =
+                "width:200px;height:200px;margin:10px;border-radius:10px;";
+              document.body.appendChild(image);
+            });
+          })
+          .catch((err) => err.json);
+      }
+      onLoad();
+    </script>
+    <head>
+      <div>
+        <h3>File Upload</h3>
+      </div>
+    </head>
+    <div style="background-color: beige; padding: 25px; border-radius: 25px">
+      <form
+        action="https://42b5-88-239-147-76.ngrok-free.app/uploadMultiple"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="file" style="width: 250px" name="files" multiple />
+        <button style="background-color: green; color: azure" type="submit">
+          Dosyaları Yükle
+        </button>
+      </form>
+    </div>
+    <div>
+      <h3>Sisteme eklenen resimler:</h3>
+    </div>
+  </body>
+</html>
