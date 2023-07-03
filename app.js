@@ -27,6 +27,7 @@ app.post("/uploadMultiple", uploadMiddleware.array("files", 12), (req, res) => {
     file: files,
   });
 });
+// deneme
 
 // params alıyoruz
 app.get("/uploads/:filename", (req, res) => {
