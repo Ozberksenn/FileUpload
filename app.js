@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5001;
+const config = require("./config.json");
+
+const port = config.service.port;
 require("dotenv").config();
 // const fs = require("fs"); // dosya dizinleri üzerinde işlem yapmak için kullandığımız moduül.
 // const path = require("path");
@@ -14,19 +16,16 @@ app.get("/", (req, res) => {
 app.post("/uploadMultiple", uploadMiddleware.array("files", 12), (req, res) => {
   const files = req.files;
   if (!files) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message: "Dosya Yüklenemedi.",
     });
   }
-  return (
-    res.json({
-      success: true,
-      message: "Dosya başarıyla yüklendi.",
-      file: files,
-    }),
-    console.log(files)
-  );
+  return res.status(200).json({
+    success: true,
+    message: "Dosya başarıyla yüklendi.",
+    file: files,
+  });
 });
 
 // params alıyoruz

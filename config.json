@@ -1,0 +1,6 @@
+{
+   "service" : {
+        "port" : 5001,
+        "fileUploadPath" : "uploads/"
+   }
+}
